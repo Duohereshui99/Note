@@ -1,0 +1,182 @@
+\documentclass[11pt,a4paper,UTF8,scheme=plain]{ctexbook}
+
+% ---------- Page setup ----------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{fancyhdr}
+
+% ---------- Math & physics ----------
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{bm}          % bold math symbols
+\usepackage{physics}     % \dv, \pdv, \qty, \vb, \comm, ...
+\usepackage{siunitx}     % SI units
+\usepackage{braket}      % Dirac notation
+\usepackage{tensor}      % tensor indices
+\usepackage{cancel}      % cancel terms in equations
+\usepackage{slashed}     % Feynman slash notation
+
+% ---------- Figures & tables ----------
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+
+% ---------- Links & references ----------
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=teal,urlcolor=magenta]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% ---------- Lists ----------
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=2em}
+
+% ---------- Theorem environments ----------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{exercise}[definition]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+% ---------- Page style: footer page numbers only ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% ---------- Metadata ----------
+\title{Physics Research Notes Template}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\chapter{Proton Decay的Bayesian计算}
+
+考虑形变势能:
+\begin{equation}
+    V(r,\theta)=V_N(r,\theta)+V_c(r,\theta)+V_{so}(r,\theta)+\frac{\hbar^2}{2\mu r^2}(l+\frac{1}{2})^2
+\end{equation}
+
+\begin{equation}
+    V_N(r,\theta)=-\frac{V_{N0}}{1+\exp\{r-R_N(\theta)/a_N(\theta)\}}
+\end{equation}
+
+\begin{equation}
+    R_N(\theta)=R_{N0}(1+\beta_2Y_{20}(\theta)+\beta_4Y_{40}(\theta))
+\end{equation}
+
+\begin{equation}
+    a_N(\theta)=a_{N0}\sqrt{1+\left(\frac{1}{R_N(\theta)}\frac{dR_N(\theta)}{d\theta}\right)^2}\times \left[1+\tilde{\beta_2}Y_{20}(\theta)+\tilde{\beta_4}Y_{40}(\theta)\right]
+\end{equation}
+
+\begin{equation}
+    V_{so}=V_{so0}\lambda_{\pi}^2\frac{1}{r}\frac{d}{dr}\frac{1}{1+\exp[(r-R_{so})/a_{so}]}\vec{\sigma}\cdot\vec{l}
+\end{equation}
+
+\begin{equation}
+    \lambda_{\pi}^2=2 fm^2
+\end{equation}
+
+\begin{equation}
+V_c(r)=
+\begin{cases}
+\frac{Z_D Z_p e^2}{2R_{c0}}\frac{3R_{c0}^2-r^2}{R_{c0}^2}, &r\leq R_{c0} \\
+\frac{Z_D Z_pe^2}{r},&  r > R_{c0}
+\end{cases}
+\end{equation}
+
+
+\section{试运行}
+
+使用参数(145Tm,形变势能,wkb积分)
+\begin{verbatim}
+#System
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=69 ; Ap=145 ; mass_excess_p=-27.58 ; mp=Ap*amu+mass_excess_p
+z1=68 ; A1=144 ; mass_excess_1=-36.61 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+mu=m1*m2/(m1+m2)
+P0=0.580
+#Potential
+
+#Deformation
+beta2 = 0.231  # quadrupole
+beta4 = -0.068  # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=5; S=0.5; J=5.5
+
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+
+# experiment data
+y=np.array([3.16e-6])    # s
+sigma=np.array([0.16e-6])
+
+#a = v0,a0,r0,p0,rc0,beta2,beta4,vso0,rso,aso
+def log_prior(a):
+    v0,a0,r0,p0,rc0,beta2,beta4,vso0,rso,aso=a
+    R=1
+    
+# Hyperparameters
+    v0_mean=55; a0_mean=0.75; r0_mean=6.556; p0_mean=0.580
+    rc0_mean=6.342; beta2_mean=0.231; beta4_mean=-0.068
+    vso0_mean=6.2; rso_mean=5.294; aso_mean=0.75
+    
+    sigma_v0=1*R; sigma_a0=0.05*R; sigma_r0=0.1*R; sigma_p0=0.05*R
+    sigma_rc0=0.1*R; sigma_beta2=0.05*R; sigma_beta4=0.01*R
+    sigma_vso0=1*R; sigma_rso=0.1*R; sigma_aso=0.05*R
+    
+
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, args=[y,sigma],a=1.0,
+    pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+\end{verbatim}
+
+获得$^{145}Tm$的Posterior分布如下图所示:
+
+(说明之前的bug出自于对model函数的解包错误,而非采样参数错误)
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure1.pdf}
+    \caption{Posterior distribution of the parameters for $^{145}Tm$ proton decay.}
+    \label{fig:1}
+\end{figure}
+
+后续预计先调整图片样式,然后做好代码优化加速,最后可以选取具体核区正式计算
+
+
+\appendix
+\chapter{Supplementary Calculations}
+Put detailed derivations that are too long for the main text here.
+
+\end{document}
