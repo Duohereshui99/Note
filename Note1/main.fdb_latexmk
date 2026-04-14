@@ -1,12 +1,12 @@
 # Fdb version 4
-["xdvipdfmx"] 1776079057.60462 "main.xdv" "main.pdf" "main" 1776079058.99635 0
-  "main.xdv" 1776079057.46152 31416 cd9cd4b4e3219e7a53784878c33111af "xelatex"
+["xdvipdfmx"] 1776168033.38134 "main.xdv" "main.pdf" "main" 1776168034.60166 0
+  "main.xdv" 1776168033.24207 31812 819dca188011081778b3604b377d3696 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1776079054.59831 "/Users/bojizheng/Desktop/texproject/Notes/Note1/main.tex" "main.xdv" "main" 1776079058.99382 0
+["xelatex"] 1776168030.9908 "/Users/bojizheng/Desktop/texproject/Notes/Note1/main.tex" "main.xdv" "main" 1776168034.60012 0
   "/System/Library/Fonts/Menlo.ttc" 1771990892 2156036 ec05dfca6821d85440da0899493002c3 ""
-  "/Users/bojizheng/Desktop/texproject/Notes/Note1/main.tex" 1776079054.25145 5046 d3ec3e021458cda5366a5dd596a90d2f ""
+  "/Users/bojizheng/Desktop/texproject/Notes/Note1/main.tex" 1776168030.65656 5100 249c43c62f982d3937853999aad83f8b ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm" 1246382020 1120 7f9f170e8aa57527ad6c49feafd45d54 ""
@@ -132,10 +132,10 @@
   "/usr/local/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt" 1774209578 5948559 ca66a59f4cdd4ce9709bed46018cb9cb ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
   "Figures/figure1.pdf" 1776047514.75274 372485 60bddfd99aacd32b47e88475eeb45e85 ""
-  "main.aux" 1776079057.46026 1088 57bef0ac8e1a469e97ad1f45e33f548a "xelatex"
-  "main.out" 1776079057.46111 425 b2f6b151be3712fcdd8a98c8837a24d8 "xelatex"
-  "main.tex" 1776079054.25145 5046 d3ec3e021458cda5366a5dd596a90d2f ""
-  "main.toc" 1776079057.46146 254 87fbf1cf8bd0997246ff01030b7fe8d6 "xelatex"
+  "main.aux" 1776168033.24066 1088 57bef0ac8e1a469e97ad1f45e33f548a "xelatex"
+  "main.out" 1776168033.24163 425 b2f6b151be3712fcdd8a98c8837a24d8 "xelatex"
+  "main.tex" 1776168030.65656 5100 249c43c62f982d3937853999aad83f8b ""
+  "main.toc" 1776168033.242 254 87fbf1cf8bd0997246ff01030b7fe8d6 "xelatex"
   (generated)
   "main.aux"
   "main.log"
