@@ -1,4 +1,5 @@
-\documentclass[11pt,a4paper,UTF8,scheme=plain]{ctexbook}
+% !TeX program = xelatex
+\documentclass[11pt,a4paper,UTF8,scheme=plain,fontset=fandol]{ctexbook}
 
 % ---------- Page setup ----------
 \usepackage[margin=2.5cm]{geometry}
@@ -58,7 +59,7 @@
 }
 
 % ---------- Metadata ----------
-\title{Physics Research Notes Template}
+\title{Physics Research Note1}
 \author{Jizheng Bo}
 \date{\today}
 
@@ -175,6 +176,72 @@ with multiprocessing.Pool() as pool:
 上图在helium1上计算,耗时约3.5d,速度较慢
 
 后续预计先调整图片样式,然后做好代码优化加速,最后可以选取具体核区正式计算
+
+我们使用如下代码修改样式: 
+\begin{verbatim}
+import prettyplease
+from scipy.stats import norm
+samples = sampler.get_chain(flat=True)
+
+#a = v0,a0,r0,p0,rc0,beta2,beta4,vso0,rso,aso
+
+labels = ["$V_0$", "$a_0$", "$r_0$", "$P_0$", "$R_{c0}$",
+ "$\\beta_2$", "$\\beta_4$", "$V_{so0}$", "$R_{so}$", "$a_{so}$"]
+fig, axes = prettyplease.corner(       
+    samples,    
+    labels=labels,
+    bins=20,                         
+    colors=['white', '#333333'],         
+    linewidth=1.0,
+    fontsize=10,
+    n_ticks=3,
+    return_axes=True
+)
+
+# ---------- 添加 1σ 区间竖线 ----------
+ndim = samples.shape[1]       # 参数个数
+
+# 先验参数定义（与 log_prior 保持一致）
+prior_means = np.array([55, 0.75, 6.556, 0.580, 6.342, 0.231, -0.068, 6.2, 5.294, 0.75])
+prior_sigmas = np.array([1, 0.05, 0.1, 0.05, 0.1, 0.05, 0.01, 1, 0.1, 0.05])
+
+for i in range(ndim):
+    ax = axes[i, i]           # 对角线子图
+    data = samples[:, i]
+    
+    # 计算 16% 和 84% 分位数（对应 1σ 区间边界）
+    q16, q84 = np.percentile(data, [16, 84])
+    
+    # 绘制两条虚线竖线
+    ax.axvline(q16, color='red', linestyle='--', linewidth=1.0, alpha=0.8)
+    ax.axvline(q84, color='red', linestyle='--', linewidth=1.0, alpha=0.8)
+    median = np.median(data)
+    ax.axvline(median, color='blue', linestyle='--', linewidth=1.0, alpha=0.8)
+
+# ---------- 叠加先验曲线 ----------
+for i in range(ndim):
+    ax = axes[i, i]
+    xlim = ax.get_xlim()
+    x_plot = np.linspace(xlim[0], xlim[1], 200)
+    pdf = norm.pdf(x_plot, loc=prior_means[i], scale=prior_sigmas[i])
+    ax.plot(x_plot, pdf, color='green', linestyle='--', linewidth=1.2, alpha=0.8)
+    ax.set_xlim(xlim)  # 恢复原范围
+
+
+
+# plt.savefig('145Tm.pdf') 
+plt.savefig('test.pdf')
+plt.show() 
+\end{verbatim}
+
+示例图为
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure2.pdf}
+    \caption{后续计算使用的后验图的示例，包括增加了prior线，以及$1\sigma$，$2\sigma$，median的标定，还使用了灰色线图}
+    \label{fig:2}
+\end{figure}
 
 
 \appendix
