@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  15 APR 2026 16:25
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  17 APR 2026 19:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,29 +920,44 @@ Overfull \hbox (10.40454pt too wide) in paragraph at lines 235--235
 
 File: Figures/figure2.pdf Graphic file (type pdf)
 <use Figures/figure2.pdf>
-[8] [9] [10
+[8] [9]
+Overfull \hbox (4.65579pt too wide) in paragraph at lines 322--322
+[]\TU/lmtt/m/n/10.95 z1=68 ; A1=144 ; mass_excess_1=-36.61 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[10]
+Overfull \hbox (4.13026pt too wide) in paragraph at lines 323--325
+\TU/FandolSong-Regular(0)/m/n/10.95 采 样 时 间 \TU/lmr/m/n/10.95 (\TU/FandolSong-Regular(0)/m/n/10.95 不 算 画 图 和 计 算 \TU/lmr/m/n/10.95 sigma \TU/FandolSong-Regular(0)/m/n/10.95 区 间 的 时 间\TU/lmr/m/n/10.95 ) \TU/FandolSong-Regular(0)/m/n/10.95 约 为 \TU/lmr/m/n/10.95 25min \TU/FandolSong-Regular(0)/m/n/10.95 获 得 \TU/lmr/m/n/10.95 145Tm \TU/FandolSong-Regular(0)/m/n/10.95 的 后 验 图 如 下 \TU/lmr/m/n/10.95 (5000/sam-
+ []
+
+File: Figures/figure3.pdf Graphic file (type pdf)
+<use Figures/figure3.pdf>
+[11] [12]
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+[13
+
+] [14
 
 ]
 Appendix A
-[11] (./main.aux)
+[15] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/07/14>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B2F6B151BE3712FCDD8A98C8837A24D8;425.
  ) 
 Here is how much of TeX's memory you used:
- 25002 strings out of 468168
- 563761 string characters out of 5432815
+ 25013 strings out of 468168
+ 564007 string characters out of 5432815
  983486 words of memory out of 5000000
- 53429 multiletter control sequences out of 15000+600000
+ 53439 multiletter control sequences out of 15000+600000
  639267 words of font info for 105 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  93i,11n,112p,3281b,1439s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (11 pages).
+Output written on main.pdf (15 pages).
