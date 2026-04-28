@@ -680,7 +680,304 @@ Standard deviation : 1.384e-07 s
 ===================================================================    
 \end{verbatim}
 
+然后我们对117La进行研究，选取计算参数如下：
 
+\begin{verbatim}
+#117La
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=57 ; Ap=117 ; mass_excess_p=-46.27 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-54.38 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.311
+#Potential
+
+#Deformation
+beta2 = 0.282  # quadrupole
+beta4 = 0.106  # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=2; S=0.5; J=1.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# cached meshes for repeated gamma evaluations
+ROOT_SEARCH_GRID = np.linspace(0.1, 150.0, 500)
+R_GRID = np.linspace(0.05, 150.0, 600)
+V_CENT_GRID = hbarc**2 * (L + 0.5)**2 / (2 * mu * R_GRID**2)
+VC_THETA_GRID = np.linspace(0, np.pi / 2, 100)
+VC_SIN_THETA = np.sin(VC_THETA_GRID)
+VC_YL0_THETA = {
+    lam: sph_harm_y(lam, 0, VC_THETA_GRID, 0).real for lam in (0, 2, 4)
+}
+VC_YL0_SIN_THETA = {
+    lam: VC_YL0_THETA[lam] * VC_SIN_THETA for lam in (0, 2, 4)
+}
+Y00 = float(sph_harm_y(0, 0, 0.0, 0).real)
+ASSAULT_QUAD_POINTS = 64
+ACTION_QUAD_POINTS = 64
+ROOT_XTOL = 1e-6
+ROOT_ATOL = 1e-5
+
+
+
+# experiment data
+y=np.array([21.7e-3])    # s
+sigma=np.array([1.8e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.311
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=0.282; beta4_mean=0.106
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, 
+    args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+
+\end{verbatim}
+
+这里增大了r的mesh范围，因为势能的范围变大了（之前的小范围r的mesh导致了根没有完全搜索完），
+此外还将prior中的几个$r_0$相关的超参数直接写为和$A$相关的公式形式，这是一个方便的改动.
+
+首先是posterior图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure15.pdf}
+    \caption{117La的后验图(10000samples/sampler的正式运行)}
+    \label{fig:15}
+\end{figure}
+
+然后是117La的参数敏感性图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure16.pdf}
+    \caption{117La的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:16}
+\end{figure}
+
+然后是117La的参数关联图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure17.pdf}
+    \caption{117La的形变势能参数的关联矩阵,非对角项明显有一定值，体现了correlation}
+    \label{fig:17}
+\end{figure}
+最后是117La的可观测量sigma区间：
+\begin{verbatim}
+========== Posterior Predictive Distribution of Lifetime ==========
+experiment data: [0.0217] s
+Number of posterior samples used: 5000
+Mean lifetime      : 2.023e-02 s
+Median lifetime    : 2.022e-02 s
+Standard deviation : 1.882e-03 s
+1σ error bar (±)   : 1.882e-03 s
+2σ error bar (±)   : 3.763e-03 s
+68% CI (1σ)        : [1.836e-02, 2.211e-02] s
+95% CI (2σ)        : [1.661e-02, 2.392e-02] s
+===================================================================
+\end{verbatim}
+
+然后对于121Pr进行研究，由于准备计算的时候查询nndc上，子核120Ce未有质量和Jpi信息，
+所以去ame2020上查询了120Ce的理论预估质量，此外，在定质子的轨道角动量L的时候，我们查询121Pr
+的Jpi信息，在nndc上有
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure21.png}
+    \caption{121Pr的核数据查询结果,由于3/2-是基态，所以我们选择L=1的轨道进行计算}
+    \label{fig:21}
+\end{figure}
+
+\clearpage
+
+对于121Pr选取的计算参数如下：
+\begin{verbatim}
+#System of Proton Decay
+#121Pr
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=59 ; Ap=121 ; mass_excess_p=-41.551 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-49.730 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.122
+#Potential
+
+#Deformation
+beta2 = 0.304  # quadrupole
+beta4 = 0.087  # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=1; S=0.5; J=1.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# experiment data
+y=np.array([10e-3])    # s
+sigma=np.array([6e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.311
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=0.304 ; beta4_mean=0.087
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, 
+    args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+
+\end{verbatim}
+
+
+得到了121Pr的posterior图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure18.pdf}
+    \caption{121Pr的后验图(10000samples/sampler的正式运行)}
+    \label{fig:18}
+\end{figure}
+
+然后是121Pr的参数敏感性图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure19.pdf}
+    \caption{121Pr的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:19}
+\end{figure}
+
+然后是121Pr的参数关联图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure20.pdf}
+    \caption{121Pr的形变势能参数的关联矩阵} 
+    \label{fig:20}
+\end{figure}
+
+\clearpage
+然后对于131Eu进行计算
+
+选取了131Eu的计算参数如下：
+\begin{verbatim}
+#System of Proton Decay
+#131Eu
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=63 ; Ap=131 ; mass_excess_p=-39.5 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-47.7 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.029
+#Potential
+
+#Deformation
+beta2 = 0.331  # quadrupole
+beta4 = 0.018  # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=2; S=0.5; J=1.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# experiment data
+y=np.array([17.8e-3])    # s
+sigma=np.array([1.9e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.029
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=0.331 ; beta4_mean=0.018
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior,
+     args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+\end{verbatim}
+\clearpage
+获得了131Eu的posterior图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure22.pdf}
+    \caption{131Eu的后验图(10000samples/sampler的正式运行   )}
+    \label{fig:22}
+\end{figure}
+
+然后是131Eu的参数敏感性图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure23.pdf}
+    \caption{131Eu的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:23}
+\end{figure}
+
+然后是131Eu的参数关联图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure24.pdf}
+    \caption{131Eu的形变势能参数的关联矩阵}
+    \label{fig:24}
+\end{figure}
+
+\clearpage
+最后是131Eu的可观测量sigma区间：
+\begin{verbatim}
+========== Posterior Predictive Distribution of Lifetime ==========
+experiment data: [0.0178] s
+Number of posterior samples used: 5000
+Mean lifetime      : 1.860e-02 s
+Median lifetime    : 1.863e-02 s
+Standard deviation : 1.843e-03 s
+1σ error bar (±)   : 1.843e-03 s
+2σ error bar (±)   : 3.686e-03 s
+68% CI (1σ)        : [1.681e-02, 2.040e-02] s
+95% CI (2σ)        : [1.489e-02, 2.217e-02] s
+===================================================================
+\end{verbatim}
 
 
 
