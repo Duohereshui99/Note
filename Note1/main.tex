@@ -982,6 +982,294 @@ Standard deviation : 1.843e-03 s
 
 
 
+然后是135Tb的计算，选取的计算参数如下：
+\begin{verbatim}
+#System of Proton Decay
+#135Tb
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=65 ; Ap=135 ; mass_excess_p=-33.1 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-41.5 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.028
+#Potential
+
+#Deformation
+beta2 = 0.322  # quadrupole
+beta4 = -0.037 # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=3; S=0.5; J=3.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# experiment data
+y=np.array([0.94e-3])    # s
+sigma=np.array([0.33e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.028
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=0.322 ; beta4_mean=-0.037
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, 
+    args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+
+\end{verbatim}
+
+
+获得了135Tb的posterior图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure25.pdf}
+    \caption{135Tb的后验图(10000samples/sampler的正式运行)}
+    \label{fig:25}
+\end{figure}
+
+然后是135Tb的参数敏感性图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure26.pdf}
+    \caption{135Tb的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:26}
+\end{figure}
+
+然后是135Tb的参数关联图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure27.pdf}
+    \caption{135Tb的形变势能参数的关联矩阵}
+    \label{fig:27}
+\end{figure}
+\clearpage
+最后是135Tb的可观测量sigma区间：
+\begin{verbatim}
+========== Posterior Predictive Distribution of Lifetime ==========
+experiment data: [0.00094] s
+Number of posterior samples used: 5000
+Mean lifetime      : 1.266e-03 s
+Median lifetime    : 1.251e-03 s
+Standard deviation : 2.777e-04 s
+1σ error bar (±)   : 2.777e-04 s
+2σ error bar (±)   : 5.553e-04 s
+68% CI (1σ)        : [9.946e-04, 1.539e-03] s
+95% CI (2σ)        : [7.691e-04, 1.848e-03] s
+===================================================================
+\end{verbatim}
+
+然后对141Ho进行研究，选取的计算参数如下：
+\begin{verbatim}
+#System of Proton Decay
+#141Ho
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=67 ; Ap=141 ; mass_excess_p=-34.4 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-42.8 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.008
+#Potential
+
+#Deformation
+beta2 = 0.253  # quadrupole
+beta4 = -0.039 # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=3; S=0.5; J=3.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# experiment data
+y=np.array([4.1e-3])    # s
+sigma=np.array([0.1e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.008
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=0.253 ; beta4_mean=-0.039
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, 
+    args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+
+
+\end{verbatim}
+
+获得了141Ho的posterior图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure28.pdf}
+    \caption{141Ho的后验图(10000samples/sampler的正式运行)}
+    \label{fig:28}
+\end{figure}
+
+然后是141Ho的参数关联图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure29.pdf}
+    \caption{141Ho的形变势能参数的关联矩阵}
+    \label{fig:29}
+\end{figure}
+
+然后是141Ho的参数敏感性图：
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure30.pdf}
+    \caption{141Ho的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:30}
+\end{figure}
+
+
+
+
+\clearpage
+最后是141Ho的可观测量sigma区间：
+\begin{verbatim}
+========== Posterior Predictive Distribution of Lifetime ==========
+experiment data: [0.0041] s
+Number of posterior samples used: 5000
+Mean lifetime      : 4.128e-03 s
+Median lifetime    : 4.125e-03 s
+Standard deviation : 1.083e-04 s
+1σ error bar (±)   : 1.083e-04 s
+2σ error bar (±)   : 2.167e-04 s
+68% CI (1σ)        : [4.021e-03, 4.235e-03] s
+95% CI (2σ)        : [3.916e-03, 4.346e-03] s
+===================================================================
+\end{verbatim}
+
+
+然后对151Lu进行研究，选取的计算参数如下：
+\begin{verbatim}
+#System of Proton Decay
+#151Lu
+e2=1.43997 ; hbarc=197.3269718 ; amu=931.49432
+zp=71 ; Ap=151 ; mass_excess_p=-30.3 ; mp=Ap*amu+mass_excess_p        #Parent
+z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-38.8 ; m1=A1*amu+mass_excess_1    #1-> daughter
+z2=1  ; A2=1   ; mass_excess_2=7.288971064 ; m2=A2*amu+mass_excess_2
+Q=mp-m1-m2
+print("Q=",Q)
+mu=m1*m2/(m1+m2)
+P0=0.490
+#Potential
+
+#Deformation
+beta2 = -0.167  # quadrupole
+beta4 = -0.035 # hexadecapole 
+
+#Polarizaton
+beta2tilde = 0  
+beta4tilde = 0
+
+#spin-orbit
+Vso0=6.2 ; rso=1.01*(A1)**(1/3) ; aso=0.75 ; lambda_pi=np.sqrt(2)
+L=5; S=0.5; J=5.5
+print("rso=",rso)
+#Vn
+a0=0.75 ; r0=1.27*A1**(1/3)-0.1 ; V0=55
+print("r0=",r0)
+#Vc
+Rc0 = 1.21 * A1**(1/3)          
+print("Rc0=",Rc0)
+#mesh
+r = np.linspace(0.03, 30.0, 1000) # avoid too small r
+
+# experiment data
+y=np.array([79e-3])    # s
+sigma=np.array([1e-3])
+
+# Hyperparameters in Prior
+    v0_mean=55; a0_mean=0.75; r0_mean=1.27*A1**(1/3)-0.1; p0_mean=0.490
+    rc0_mean=1.21 * A1**(1/3); beta2_mean=-0.167 ; beta4_mean=-0.035
+    vso0_mean=6.2; rso_mean=1.01*(A1)**(1/3); aso_mean=0.75
+with multiprocessing.Pool() as pool:
+    sampler = emcee.EnsembleSampler(nwalkers, M, log_posterior, 
+    args=[y,sigma],a=2.0,pool=pool)
+    state = sampler.run_mcmc(initial_positions, 200)
+    sampler.reset()
+    sampler.run_mcmc(state,10000)
+
+\end{verbatim}
+
+
+获得了151Lu的posterior图：
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure31.pdf}
+    \caption{151Lu的后验图(10000samples/sampler的正式运行)}
+    \label{fig:31}
+\end{figure}
+
+然后是151Lu的参数关联图：   
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure32.pdf}
+    \caption{151Lu的形变势能参数的关联矩阵}
+    \label{fig:32}
+\end{figure}
+
+然后是151Lu的参数敏感性图：
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/figure33.pdf}
+    \caption{151Lu的参数敏感性图(1sigma区间内的参数变化对半衰期的影响)}
+    \label{fig:33}
+\end{figure}
+
+最后是151Lu的可观测量sigma区间：
+\begin{verbatim}
+========== Posterior Predictive Distribution of Lifetime ==========
+experiment data: [0.079] s
+Number of posterior samples used: 5000
+Mean lifetime      : 7.915e-02 s
+Median lifetime    : 7.916e-02 s
+Standard deviation : 1.013e-03 s
+1σ error bar (±)   : 1.013e-03 s
+2σ error bar (±)   : 2.026e-03 s
+68% CI (1σ)        : [7.813e-02, 8.014e-02] s
+95% CI (2σ)        : [7.718e-02, 8.115e-02] s
+===================================================================
+\end{verbatim}
+
+
+
+
+
+
+
 \appendix
 \chapter{Supplementary Calculations}
 Put detailed derivations that are too long for the main text here.

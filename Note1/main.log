@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  28 APR 2026 18:33
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  30 APR 2026 14:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1057,13 +1057,68 @@ Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+
+Overfull \hbox (16.15329pt too wide) in paragraph at lines 1035--1035
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-41.5 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
 [38
 
 ]
-Appendix A
-[39
+File: Figures/figure25.pdf Graphic file (type pdf)
+<use Figures/figure25.pdf>
+File: Figures/figure26.pdf Graphic file (type pdf)
+<use Figures/figure26.pdf>
+File: Figures/figure27.pdf Graphic file (type pdf)
+<use Figures/figure27.pdf>
+ [39] [40] [41]
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 
-] (./main.aux)
+Overfull \hbox (16.15329pt too wide) in paragraph at lines 1128--1128
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-42.8 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[42
+
+]
+File: Figures/figure28.pdf Graphic file (type pdf)
+<use Figures/figure28.pdf>
+File: Figures/figure29.pdf Graphic file (type pdf)
+<use Figures/figure29.pdf>
+File: Figures/figure30.pdf Graphic file (type pdf)
+<use Figures/figure30.pdf>
+ [43] [44] [45]
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+
+Overfull \hbox (16.15329pt too wide) in paragraph at lines 1224--1224
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-38.8 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[46
+
+]
+File: Figures/figure31.pdf Graphic file (type pdf)
+<use Figures/figure31.pdf>
+File: Figures/figure32.pdf Graphic file (type pdf)
+<use Figures/figure32.pdf>
+File: Figures/figure33.pdf Graphic file (type pdf)
+<use Figures/figure33.pdf>
+
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+[47] [48] [49] [50
+
+]
+Appendix A
+[51] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/07/14>
@@ -1072,12 +1127,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D1EA54709260F42F9645A9F658E0625B;511.
  ) 
 Here is how much of TeX's memory you used:
- 25302 strings out of 468168
- 573650 string characters out of 5432815
+ 25401 strings out of 468168
+ 575963 string characters out of 5432815
  983486 words of memory out of 5000000
- 53706 multiletter control sequences out of 15000+600000
+ 53796 multiletter control sequences out of 15000+600000
  639267 words of font info for 105 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  93i,11n,112p,3281b,1439s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (39 pages).
+Output written on main.pdf (51 pages).
