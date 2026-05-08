@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  30 APR 2026 14:15
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  8 MAY 2026 15:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1114,11 +1114,81 @@ Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
 Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
-[47] [48] [49] [50
+[47] [48] [49]
+Overfull \hbox (27.65079pt too wide) in paragraph at lines 1320--1320
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-32.730 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[50
 
 ]
+File: Figures/figure34.pdf Graphic file (type pdf)
+<use Figures/figure34.pdf>
+File: Figures/figure35.pdf Graphic file (type pdf)
+<use Figures/figure35.pdf>
+File: Figures/figure36.pdf Graphic file (type pdf)
+<use Figures/figure36.pdf>
+ [51] [52]
+Overfull \hbox (10.40454pt too wide) in paragraph at lines 1400--1400
+[]\TU/lmtt/m/n/10.95 zp=75 ; Ap=161 ; mass_excess_p=-20.84282 ; mp=Ap*amu+mass_excess_p        #Parent[] 
+ []
+
+
+Overfull \hbox (44.89703pt too wide) in paragraph at lines 1400--1400
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-29.329073 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[53
+
+] [54]
+File: Figures/figure37.pdf Graphic file (type pdf)
+<use Figures/figure37.pdf>
+File: Figures/figure38.pdf Graphic file (type pdf)
+<use Figures/figure38.pdf>
+File: Figures/figure39.pdf Graphic file (type pdf)
+<use Figures/figure39.pdf>
+
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+Missing character: There is no σ (U+03C3) in font [lmmono10-regular]:!
+[55
+
+] [56]
+File: Figures/figure40.png Graphic file (type bmp)
+<Figures/figure40.png>
+
+Overfull \hbox (44.89703pt too wide) in paragraph at lines 1509--1509
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-20.424723 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[57
+
+]
+Overfull \hbox (10.40454pt too wide) in paragraph at lines 1566--1566
+[]\TU/lmtt/m/n/10.95 zp=79 ; Ap=171 ; mass_excess_p=-7.562303 ; mp=Ap*amu+mass_excess_p        #Parent[] 
+ []
+
+
+Overfull \hbox (44.89703pt too wide) in paragraph at lines 1566--1566
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-16.299202 ; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[58]
+Overfull \hbox (4.65578pt too wide) in paragraph at lines 1623--1623
+[]\TU/lmtt/m/n/10.95 zp=81 ; Ap=176 ; mass_excess_p=0.584728 ; mp=Ap*amu+mass_excess_p        #Parent[] 
+ []
+
+
+Overfull \hbox (33.39954pt too wide) in paragraph at lines 1623--1623
+[]\TU/lmtt/m/n/10.95 z1=zp-1 ; A1=Ap-1 ; mass_excess_1=-7.969443; m1=A1*amu+mass_excess_1    #1-> daughter[] 
+ []
+
+[59] [60]
 Appendix A
-[51] (./main.aux)
+[61
+
+] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/07/14>
@@ -1127,12 +1197,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D1EA54709260F42F9645A9F658E0625B;511.
  ) 
 Here is how much of TeX's memory you used:
- 25401 strings out of 468168
- 575963 string characters out of 5432815
+ 25478 strings out of 468168
+ 577746 string characters out of 5432815
  983486 words of memory out of 5000000
- 53796 multiletter control sequences out of 15000+600000
+ 53866 multiletter control sequences out of 15000+600000
  639267 words of font info for 105 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  93i,11n,112p,3281b,1439s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (51 pages).
+Output written on main.pdf (61 pages).
